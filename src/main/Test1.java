@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main;
 
-/**
- *
- * @author guilherme
- */
-public class Test1 {
+import db.DB;
+import java.sql.Connection;
 
-    /**
-     * @param args the command line arguments
-     */
+public class Test1 {
     public static void main(String[] args) {
-        // TODO code application logic here
+        Connection conn = DB.getConnection();
+        if(conn != null){
+            System.out.println("Done!");
+            DB.closeConnection();
+        }
     }
-    
 }
