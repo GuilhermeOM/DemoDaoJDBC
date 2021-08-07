@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SellerDaoJDBC implements SellerDAO{
     
@@ -132,7 +135,40 @@ public class SellerDaoJDBC implements SellerDAO{
 
     @Override
     public List<Seller> findByDepartment(Department department) {
-        return null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try{
+            st = conn.prepareStatement(
+                    "SELECT seller.*,department.Name as DepName "
+                    + "FROM seller INNER JOIN department "
+                    + "ON seller.departmentId = department.Id "
+                    + "WHERE department.Id = ? "
+                    + "ORDER BY Name"
+            );
+            st.setInt(1, department.getId());
+            
+            rs = st.executeQuery();
+            
+            List<Seller> sellers = new ArrayList<>();
+            Map<Integer, Department> departments = new TreeMap<>();
+            
+            while(rs.next()){
+                Department dep = departments.get(rs.getInt("DepartmentId"));
+                if(dep == null){
+                    dep = instantiateDepartment(rs);
+                    departments.put(rs.getInt("departmentId"), dep);
+                }
+                Seller seller = instantiateSeller(rs, dep);
+                sellers.add(seller);
+            }
+            return sellers;
+        }catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally{
+            DB.closeResulSet(rs);
+            DB.closePreparedStatement(st);
+        }
     }
 
     @Override

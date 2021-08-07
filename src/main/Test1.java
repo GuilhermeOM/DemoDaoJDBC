@@ -4,7 +4,10 @@ import java.util.Date;
 import model.dao.DaoFactory;
 import model.dao.SellerDAO;
 import model.entities.Seller;
+import model.entities.Department;
 import java.util.Scanner;
+import java.util.List;
+
 
 public class Test1 {
     public static void main(String[] args) {
@@ -29,5 +32,11 @@ public class Test1 {
 //        int id = scan.nextInt();
 //        Seller seller = seDAO.findById(id);
 //        System.out.println(seller);
+//==============================================================================
+//        System.out.print("Enter the department ID to get all sellers data: ");
+//        int id = scan.nextInt();
+//        Department department = new Department(id, null);
+//        List<Seller> sellers = seDAO.findByDepartment(department);
+//        sellers.forEach(System.out :: println);
     }
 }
