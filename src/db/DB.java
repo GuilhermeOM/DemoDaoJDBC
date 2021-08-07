@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 public class DB {
@@ -50,7 +51,17 @@ public class DB {
                 st.close();
             }
         }catch(SQLException e){
-            e.getMessage();
+            throw new DbException(e.getMessage());
+        }
+    }
+    
+    public static void closeResulSet(ResultSet rs){
+        try{
+            if(rs != null){
+                rs.close();
+            }
+        }catch(SQLException e){
+            throw new DbException(e.getMessage());
         }
     }
 }

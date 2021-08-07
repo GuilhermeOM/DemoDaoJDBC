@@ -24,5 +24,10 @@ public class Test1 {
 //        int id = scan.nextInt();
 //        seDAO.deleteById(id);
 //        System.out.println("Deleted!");
+//==============================================================================
+//        System.out.print("Enter the seller ID to get his data: ");
+//        int id = scan.nextInt();
+//        Seller seller = seDAO.findById(id);
+//        System.out.println(seller);
     }
 }
