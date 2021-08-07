@@ -80,7 +80,7 @@ public class SellerDaoJDBC implements SellerDAO{
             DB.closePreparedStatement(st);
         }
     }
-
+    
     @Override
     public void deleteById(Integer id) {
         PreparedStatement st = null;
